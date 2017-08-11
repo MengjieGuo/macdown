@@ -18,7 +18,7 @@
 
 ##2 最佳解决方案
 
-[celery 工作图](https://github.com/MengjieGuo/macdown/blob/master/edrawmax/celeryBestPractice.eddx)
+![celery 工作图](https://github.com/MengjieGuo/macdown/blob/master/edrawmaxpng/celery%E5%AE%9E%E8%B7%B5.png)
 
 
 > 看到网上的解决方案后，结合自己的项目，提出方案。
