@@ -1,4 +1,4 @@
-#celery在docker中的使用策略
+# celery在docker中的使用策略
 
 [celery最佳实践](http://siddontang.com/2014/07/20/celery-best-practices/)
 
