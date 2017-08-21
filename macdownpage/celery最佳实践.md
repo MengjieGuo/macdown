@@ -1,4 +1,4 @@
-#celery在docker中的使用策略
+# celery在docker中的使用策略
 
 [celery最佳实践](http://siddontang.com/2014/07/20/celery-best-practices/)
 
@@ -11,14 +11,14 @@
 在默认情况下，celery只有一个默认队列。
 ```
 
-##1 celery是一个分布式任务队列管理工具
+## 1 celery是一个分布式任务队列管理工具
 > celery的工作流程是这样的，Broker这里负责管理任务队列，Worker负责实际的任务处理，Web应用负责把任务放入任务队列。
 > 
 > 对于web应用，现在有这样的需求，后台有不同类型的任务需要异步进行处理。 这些任务有不同的优先级，不同的处理时间，不同的数量。如何让任务都不堆积在任务队列，从而让任务都顺利执行？
 
-##2 最佳解决方案
+## 2 最佳解决方案
 
-![celery 工作图](https://github.com/MengjieGuo/macdown/blob/master/edrawmaxpng/celery%E5%AE%9E%E8%B7%B5.png)
+![celery 工作图](https://github.com/MengjieGuo/macdown/blob/master/edrawmax/celeryBestPractice.jpg)
 
 
 > 看到网上的解决方案后，结合自己的项目，提出方案。
@@ -28,6 +28,6 @@
 > 最后是worker取队列中的任务进行执行。一个worker的工作能力是有限的，即使worker能够多进程工作，但是当任务数量很大时一个worker也会感觉捉襟见肘、分身乏力。所以需要在多个服务器上面启动多个celery的worker实例，多个worker可以从一个队列取任务。这样不同worker就可以做不同的任务，对于数量多的任务可以多给几个worker；对于执行时间长的，可以给个专门的worker。
 > 
 
-##3 本次方案（等待修改）
+## 3 本次方案（等待修改）
 > 
 > 由于我们本次的服务器只有一个，任务也只有一个，只是任务数量比较多。所以及时worker可以开启多个，以尽可能多个实用cpu等资源，但是worker数量不宜太多，cpu，内存也是有瓶颈的，worker多了cpu当然处理不过来，这里可以开启5个左右。队列可以开2到3个，两个队列分发任务会比一个快。可以观察到任务在多列中是否堆积，任务队列的每秒发任务数量。如果堆积，说明任务处理不过来，可以再加个worker，如果还是不行，说明服务器cpu，内存瓶颈，没办法。
