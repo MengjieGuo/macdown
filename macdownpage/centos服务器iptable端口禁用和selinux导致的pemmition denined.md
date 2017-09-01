@@ -1,0 +1,1 @@
+# centos服务器iptable端口禁用和selinux导致的pemmition denined
