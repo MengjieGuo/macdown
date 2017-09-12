@@ -35,15 +35,20 @@ Of course, you can not use the installation script, the manual installation
 * Repotrack can download the software we want to install and its dependencies. All the packages will be downloaded to the current directory, so every time you use repotrack to build a directory, and then use the directory in the repotrack.
 
 download our packages.
+
 > ```
-> $ create docker_repo
+> $ mkdir docker_repo
+> 
+> $ cd docker_repo
+> 
 > $ repotrack docker
 > ```
 
 And then... waiting for download to complete.
 > ```
-> $ cd ../
-> $ tar -cvf docker_repo.tar /docker_repo
+> $ cd ../  
+> 
+> $ tar -cvf docker_repo.tar docker_repo
 > ```
 
 Send our packets to the destination host, of course, to be connected through the network.
@@ -69,10 +74,22 @@ https://www.linuxquestions.org/questions/linux-newbie-8/yum-local-install-packag
 
 You can now use localinstall to install the docker. Of course, you must in the docker_repo directory.
 > ```
-> $ yum localinstall docker
+> $ yum localinstall docker_rpm_name
 > ```
 
-Here may encounter a software conflict, that is, has installed a software package, but now have to install a different version. According to the tips - skip.
+Here may encounter a software conflict, that is, has installed a software package, but now have to install a different version. According to the tips - skip. You also may 
+
+Next step is add a group docker, add user to docker group and start docker.
+> groupadd docker 
+> 
+> usermod -a -G docke USER_NAME
+> 
+> service docker start
+>
+
+If you want docker to start with computer. Of course docker must be a service.
+> systemctl enable docker
+ 
 
 ## Build local Docker Image for Application Running Environmnet
 
