@@ -4,7 +4,7 @@
 使用ip+port访问时都会出现connection oef的信息，所以需要先开启80端口
 ```
 
-## iptables和firewalld
+## iptables和firewalld（建议看firewalld）
 - iptables和firewalld都是防火墙工具，firewalld更加的高级，好用。
 - 参照网上的iptables教程，大部分都是在添加完端口后重启服务，像这样
 [iptables](http://www.cnblogs.com/kreo/p/4368811.html)但是本人遇到了这样的问题
@@ -42,25 +42,31 @@ systemctl start iptables.service
 #查看状态
 systemctl status iptables.service
 ```
-更加好用的工具还是firewalld，有的centos在装机时就已经安装了firewalld，如果没有安装，可以另外安装。
+> 更加好用的工具还是firewalld，有的centos在装机时就已经安装了firewalld，如果没有安装，可以另外安装。
 []()
 
-### 开启80端口 --permanent是永久开启的意思 --zone
+#### 查看iptables规则
+`$ iptables -L -n`
+
+### firewalld开启80端口 --permanent是永久开启的意思 --zone
 
 `$ firewall-cmd --zone=public --add-port=80/tcp --permanent`
-重启firewalld服务
-systemctl restart firewalld.service
 
-connection refused，说明端口开启了但是被防火墙阻止了
+> 重启firewalld服务
 
-centos7还有selinux安全机制，关闭selinux
+`$ systemctl restart firewalld.service`
 
-iptables -L -n
+> 重新加载配置
 
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
-setsebool -P httpd_can_network_connect 1
+`$ firewall-cmd --reload`
 
-source /etc/selinux/config
+> connection refused，说明端口开启了但是被防火墙阻止了
+
+#### centos7还有selinux安全机制，关闭selinux
+`$ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config`
+`$ setsebool -P httpd_can_network_connect 1`
+
+`$ source /etc/selinux/config`
 
 
 nginx -t 

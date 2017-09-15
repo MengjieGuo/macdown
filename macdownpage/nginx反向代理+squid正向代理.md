@@ -4,9 +4,11 @@
 就可以通过nginx的反向代理来完成。当内网服务器需要调用第三方api时就需要使用正向代理，普通代理或者透明代理。
 不要用任何方式把内网机器直接联网。
 ```
-![](file:///Users/screwman/Desktop/proxy1.png)
+![](../edrawmaxpng/squid+nginx代理.png)
 
-![](file:///Users/screwman/Desktop/proxy2.png)
+![](../edrawmaxpng/proxy1.png)
+
+![](../edrawmaxpng/proxy2.png)
 
 ## nginx反向代理
 ### 1、代理服务器需要配置要代理到的内网的ip:port，更为复杂的nginx配置需要继续学习。
