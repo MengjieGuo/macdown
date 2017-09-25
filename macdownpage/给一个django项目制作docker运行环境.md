@@ -27,7 +27,7 @@ RUN pip install django
 
 And then waitting for download complited!! Okey, it will costs a lot of time!!!
 
-##2 项目使用了哪些python模块
+## 2 项目使用了哪些python模块
 作为程序开发人员，为了实现某一个功能，一般会使用某些新的模块。
 
 这些模块一般是通过pip进行安装，程序员在本地使用虚拟python环境进行开发，
