@@ -30,24 +30,24 @@ service:
 # https://github.com/docker-library/postgres/blob/master/9.6/Dockerfile
   postgres:
     image: postgres:latest                                              # 服务要使用的镜像名称（仓库名称／tag），如果镜像在本地不存在，就会从网上pull
-    # dockerfile: dockerfile				                            # 不能和image：一起使用，用来指定额外的编译镜像的Dockerfile文件
-    # build: ./dir/       					                            # 如果想使用build构建的容器，可以使用build，给出dockerfile所在目录
+    # dockerfile: dockerfile				                # 不能和image：一起使用，用来指定额外的编译镜像的Dockerfile文件
+    # build: ./dir/       					        # 如果想使用build构建的容器，可以使用build，给出dockerfile所在目录
     # command:  bundle exec thin -p 3000                                # 覆盖容器启动后默认执行的命令
     # device:                                                           # 指定设备映射关系
     #	- "/dev/ttyUSB1:/dev/ttyUSB2"
-    # dns: 	 								                            # 自定义dns服务器，可以是一个值，或列表
+    # dns: 	 								            # 自定义dns服务器，可以是一个值，或列表
     #	- 8.8.8.8
     #	- 9.9.9.9
     # env_file: 					                                    # 指定环境变量文件，从文件获取环境变量，如果与environment定义的变量有冲突，以后者为准，
-    											                        # env文件支持#注释，每一行的格式：ENV_NAME=developname
-    											                        # 若通过 docker-compose -f FILE 方式来指定 Compos模板文件，则 env_file 中变量的路径会基于模板文件路径。
+    											    # env文件支持#注释，每一行的格式：ENV_NAME=developname
+    											    # 若通过 docker-compose -f FILE 方式来指定 Compos模板文件，则 env_file 中变量的路径会基于模板文件路径。
     	- ./common.env
     	- ./apps/web.env
     	- /opt/secrets.env
     # environment:
     #	PWD:
     #	ENV:projectenv
-    environment:								                        # 只给定名称的变量会自动获取运行 Compose 主机上对应变量的值，可以用来防止泄露不必要的数据。
+    environment:								            # 只给定名称的变量会自动获取运行 Compose 主机上对应变量的值，可以用来防止泄露不必要的数据。
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres.lkj
       - POSTGRES_HOST=postgreshost
