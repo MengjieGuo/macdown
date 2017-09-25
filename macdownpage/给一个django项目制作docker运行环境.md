@@ -17,13 +17,13 @@ RUN pip install django
 
 `docker search python`
 
-[pic1]()
+![pic1](../pictures/make_docker_image_for_django_project/dockersearch.png)
 
 > `docker pull docker.io/django`
 > 
 > `docker pull docker.io/python`
 
-[pic2]()
+![!pic2](../pictures/make_docker_image_for_django_project/dockerpull.png)
 
 And then waitting for download complited!! Okey, it will costs a lot of time!!!
 
@@ -49,7 +49,8 @@ And then waitting for download complited!! Okey, it will costs a lot of time!!!
 docker需要下载安装requirements.txt中给出的模块，所以，如果程序需要的环境非常的多，那么可能会非常的花时间。
 
 大概花了15分钟。
-![完成图片✅](file:///Users/screwman/Desktop/buildenvproject.png)
+
+![完成图片✅](../pictures/make_docker_image_for_django_project/buildenvproject.png)
 
 在dockerfile中，我们可以设置工作目录，当然首先要查看镜像的目录结构，一般可以先运行镜像，
 
@@ -62,8 +63,7 @@ docker需要下载安装requirements.txt中给出的模块，所以，如果程�
 之后会进入交互式命令行，ls进行查看。
 以后项目的操作目录就是这里的目录，如果想要把文件写到计算机中的某一个目录，就需要使用volunme进行挂载。当然考虑到还需要其他像数据库之类的镜像，考虑使用docker-compose对容器进行管理。
 
-![](file:///Users/screwman/Desktop/lookimagesdir.png)
-
+![](../pictures/make_docker_image_for_django_project/lookimagesdir.png)
 
 如果项目需要增加新的某块
 编写dockerfile文件
@@ -79,15 +79,14 @@ RUN pip install -r requirements_plus.txt
 > 
 
 找出requirements.txt文件新增的module
-[使用pycharm的文件比较功能]()
+`使用pycharm的文件比较功能`
 右键文件，选择compare with后选择一个要比较的文件。
 
-![](file:///Users/screwman/Desktop/comparediffwithfile.png)
+![](../pictures/make_docker_image_for_django_project/comparediffwithfile.png)
 
 然后编写dockerfile文件和requirements_plus.txt
 
-
-![](file:///Users/screwman/Desktop/requirementsplus.png)
+![](../pictures/make_docker_image_for_django_project/requirementsplus.png)
 
 ## 3 项目使用了其他的镜像
 项目要运行，当然需要使用数据库来支持，又可能使用多个数据库。

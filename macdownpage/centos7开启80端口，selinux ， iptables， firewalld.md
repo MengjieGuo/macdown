@@ -50,35 +50,37 @@ vi /etc/ssh/sshd_config
 Port 22         //这行去掉#号
 Port 20000      //下面添加这一行
 ### firewalld开启80端口 --permanent是永久开启的意思 --zone
-在修改iptables规则之前，备份原有的规则
+> 在修改iptables规则之前，备份原有的规则
 
-> `iptables-save > /etc/sysconfig/iptables.bak`
+ `iptables-save > /etc/sysconfig/iptables.bak`
 
-> `$ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent`
+> 开启端口
+
+`$ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent`
 
 > 重启firewalld服务
 
 `$ sudo systemctl restart firewalld.service`
 
-> 重新加载配置
+> 重新加载配置  connection refused，说明端口开启了但是被阻止了
 
 `$ firewall-cmd --reload`
 
-> connection refused，说明端口开启了但是被阻止了
+> 关闭一个端口
 
-关闭一个端口
-> $ sudo firewall-cmd --permanent --remove-port=8080/tcp
+` $ sudo firewall-cmd --permanent --remove-port=8080/tcp`
 
-firewall-cmd --permanent --add-port=1000-2000/tcp
-执行可以成功
+> 批量添加,执行可以成功
 
-用该命令查询
-firewall-cmd --permanent --query-port=1000/tcp
-端口1000没开放
+`firewall-cmd --permanent --add-port=1000-2000/tcp`
 
-但是如果用
-firewall-cmd --permanent --query-port=1000-2000/tcp查询 
-又是开发的
+> 用该命令查询端口1000没开放
+
+`firewall-cmd --permanent --query-port=1000/tcp`
+
+> 但是如果用tcp查询 又是开发的
+
+`firewall-cmd --permanent --query-port=1000-2000/`
 
 #### centos7还有selinux安全机制，关闭selinux
 /usr/sbin/sestatus -v
@@ -89,12 +91,14 @@ setenforce 0
 
 永久关闭需要修改配置文件并重新启动服务器
 
-查看当前selinux允许的端口
-semanage port -l |grep ssh
+> 查看当前selinux允许的端口
 
-添加20000端口到 SELinux
-semanage port -a -t ssh_port_t -p tcp 20000
-systemctl restart sshd.service
+`semanage port -l |grep ssh`
+
+> 添加20000端口到 SELinux
+
+`semanage port -a -t ssh_port_t -p tcp 20000`
+`systemctl restart sshd.service`
 
 `$ sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config`
 `$ sudo setsebool -P httpd_can_network_connect 1`

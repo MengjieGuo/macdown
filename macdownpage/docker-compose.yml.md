@@ -2,6 +2,7 @@
 编写docker-compose.yml文件需要
 注意代理环境变量和数据库环境变量
 注意启动web和celery worker的命令改为了circus启动。
+[配置文件参考](https://yeasy.gitbooks.io/docker_practice/content/compose/yaml_file.html#dnssearch)
 
 ```
 version: '0.1'
@@ -28,17 +29,49 @@ service:
 #    里面的端口一般是5432，从你所使用的postgre镜像的制作dockerfile中会有EXPOSE 5432这样的语句。
 # https://github.com/docker-library/postgres/blob/master/9.6/Dockerfile
   postgres:
-    image: postgres:latest
-    environment:
+    image: postgres:latest                                              # 服务要使用的镜像名称（仓库名称／tag），如果镜像在本地不存在，就会从网上pull
+    # dockerfile: dockerfile				                            # 不能和image：一起使用，用来指定额外的编译镜像的Dockerfile文件
+    # build: ./dir/       					                            # 如果想使用build构建的容器，可以使用build，给出dockerfile所在目录
+    # command:  bundle exec thin -p 3000                                # 覆盖容器启动后默认执行的命令
+    # device:                                                           # 指定设备映射关系
+    #	- "/dev/ttyUSB1:/dev/ttyUSB2"
+    # dns: 	 								                            # 自定义dns服务器，可以是一个值，或列表
+    #	- 8.8.8.8
+    #	- 9.9.9.9
+    # env_file: 					                                    # 指定环境变量文件，从文件获取环境变量，如果与environment定义的变量有冲突，以后者为准，
+    											                        # env文件支持#注释，每一行的格式：ENV_NAME=developname
+    											                        # 若通过 docker-compose -f FILE 方式来指定 Compos模板文件，则 env_file 中变量的路径会基于模板文件路径。
+    	- ./common.env
+    	- ./apps/web.env
+    	- /opt/secrets.env
+    # environment:
+    #	PWD:
+    #	ENV:projectenv
+    environment:								                        # 只给定名称的变量会自动获取运行 Compose 主机上对应变量的值，可以用来防止泄露不必要的数据。
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres.lkj
       - POSTGRES_HOST=postgreshost
       - POSTGRES_NAME=wxfine
       - PGDATA=/var/lib/postgresql/data/wxfine                          # 这个变量是数据库wxfine的数据所在目录
-    volumn:
+      - PWD
+      - MYPWD=${PWD}
+    # external_links:                                                   # 链接到 docker-compose.yml 外部的容器，甚至 并非 Compose 管理的外部容器。参数格式跟 links 类似
+    #	- redis_1
+    #	- project_1_db_1:postgres
+    volumn:                                                             # 数据卷所挂载路径设置。可以设置宿主机路径 （HOST:CONTAINER） 或加上访问模式 （HOST:CONTAINER:ro）
       - /home/guo/postdata:/var/lib/postgresql/data
-    post:
+      - ~/test/dir:/etc/my/dir:ro
+    # expose:                                                           # 暴露端口，但不映射到宿主机，只被连接的服务访问。仅可以指定内部端口为参数
+    #	- "3000"
+    #	- "22"
+    post:                                                               # 暴露的端口信息,注意：当使用 HOST:CONTAINER 格式来映射端口时，如果你使用的容器端口小于 60 并且没放到引号里，可能会得到错误结果，因为 YAML 会自动解析 xx:yy 这种数字格式为 60 进制。为避免出现这种问题，建议数字串都采用引号包括起来的字符串格式。
       - '5432:5432'
+      - "3000"
+      - "127.0.0.1:81:80"
+    links:                                                              # 链接到其它服务中的容器。使用服务名称（同时作为别名）或服务名称：服务别名 （SERVICE:ALIAS） 格式都可以使用的别名将会自动在服务容器中的 /etc/hosts 里创建
+		 - db
+		 - db:database
+		 - redis
 
 #  redis:
 #    image: redis:latest

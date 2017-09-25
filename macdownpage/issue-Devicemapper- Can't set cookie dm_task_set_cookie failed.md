@@ -12,3 +12,4 @@
 > '$ sudo dmsetup udevcomplete_all'
 
 当询问时再yes
+
