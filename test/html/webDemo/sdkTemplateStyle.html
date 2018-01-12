@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>访客接入 多套样式模板以及自定义会话邀请Demo</title>
+        <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet">
+        <style media="screen">
+        .m-crm{
+            max-width: 400px;
+            margin: 2rem auto 2rem;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="m-crm">
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="openSDK()">Open接入方式</button>
+        </div>
+        <script src="https://qiyukf.com/script/4ba53a88957fb27300d38fde30e0dc0f.js?templateId=2478706" charset="utf-8"></script>
+       <!--  templateId对应该页面会话邀请的模板id -->
+
+        <script type="text/javascript">
+            window.url = function(){
+                location.href = ysf.url();
+            }
+
+            window.openSDK = function(){
+                ysf.open({
+                    templateId: 123//此处id对应样式模板id,配置不同的模板id,打开的窗口样式不一样，欢迎语也不一样
+                });
+            }
+        </script>
+
+    </body>
+</html>

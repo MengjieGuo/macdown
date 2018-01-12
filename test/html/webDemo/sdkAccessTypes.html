@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>访客接入Demo</title>
+        <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet">
+        <style media="screen">
+        .m-crm{
+            max-width: 400px;
+            margin: 2rem auto 2rem;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="m-crm">
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="url()">URL接入方式</button>
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="openSDK()">Open接入方式</button>
+        </div>
+        <script src="https://qiyukf.com/script/863e6bc78871eaaebd58385fb719a184.js" charset="utf-8"></script>
+
+        <script type="text/javascript">
+            window.url = function(){
+                location.href = ysf.url();
+            }
+
+            window.openSDK = function(){
+                ysf.open();
+            }
+        </script>
+
+    </body>
+</html>

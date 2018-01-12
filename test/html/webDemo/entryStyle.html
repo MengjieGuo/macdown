@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>接入自定义图片接入</title>
+    </head>
+    <body>
+        <script src="https://qiyukf.com/script/863e6bc78871eaaebd58385fb719a184.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var min = 12 * 1 + 5,
+                max = 12 * 9 + 5;
+
+            for(var i = min; i<max; i++){
+                for(var j=1; j<10; j++){
+                    var c = Math.floor(i/j),
+                        e = i - c * j;
+
+                    if(e == 5 && c == 12){
+                        console.log('conditions of satisfaction :',c, i, j);
+                    }
+                }
+
+            }
+        </script>
+    </body>
+</html>

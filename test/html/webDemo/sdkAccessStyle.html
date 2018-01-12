@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>sdk自定义样式-demo</title>
+	<style>
+		/**
+		 * 修改图片位置
+		 *
+		 * @attribute {Number} right			- 设置图片距离浏览器右边距(可变)
+		 * @attribute {Number} bottom			- 设置图片距离浏览器下边距(可变)
+		 * @attribute {Number} max-width		- 设置图片最大宽度,建议设置为none
+		 * @attribute {Number} max-height		- 设置图片最大高度,建议设置为none
+		 */
+		body #YSF-BTN-HOLDER {
+			right: 20px;
+			bottom: 20px;
+			max-width: none;
+			max-height: none;
+		}
+		/**
+		 * 清除阴影
+		 *
+		 * @attribute {Number} right			- 设置图片距离容器右边距,建议设置为0
+		 * @attribute {Number} bottom			- 设置图片距离容器下边距,建议设置为0
+		 * @attribute {Number} box-shadow		- 阴影属性,建议设置为none
+		 */
+		#YSF-BTN-HOLDER #YSF-CUSTOM-ENTRY-0{
+			right:0;
+			bottom:0;
+			box-shadow:none;
+		}
+		/**
+		 * 修改图片大小
+		 *
+		 * @attribute {Number} width 			- 设置图片宽度(可变)
+		 * @attribute {Number} height			- 设置图片高度(可变)
+		 * @attribute {Number} max-width		- 设置图片最大宽度,建议设置为none
+		 * @attribute {Number} max-width		- 设置图片最大高度,建议设置为none
+		 */
+		#YSF-BTN-HOLDER #YSF-CUSTOM-ENTRY-0 img{
+			width:400px;
+			height:400px;
+			max-width: none;
+			max-height: none;
+		}
+	</style>
+</head>
+<body>
+<script src="https://qiyukf.com/script/863e6bc78871eaaebd58385fb719a184.js"></script>
+</body>
+</html>

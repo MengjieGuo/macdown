@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web轻量CRM接入方案</title>
+        <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet">
+    </head>
+    <body>
+        <!--<script src="https://qiyukf.com/script/4ba53a88957fb27300d38fde30e0dc0f.js"-->
+                <!--charset="utf-8"></script>-->
+        <script src="https://qiyukf.com/script/863e6bc78871eaaebd58385fb719a184.js"
+                charset="utf-8"></script>
+        <script type="text/javascript">
+            ysf.on({
+                'onload': function(){
+                //     ysf.config({
+                //        uid:"201609051809",
+                //        name:'牛逼牛逼',
+                //        email:'test@163.com',
+                //        mobile:'13888888888'
+                //    });
+                   ysf.config({
+                       uid:"201609051809",
+                       data:JSON.stringify([
+                           {"key":"real_name", "value":"牛逼土豪"},
+                           {"key":"mobile_phone", "hidden":true},
+                           {"key":"email", "value":"13800000000@163.com"},
+                           {"index":0, "key":"account", "label":"账号", "value":"zhangsan" , "href":"http://example.domain/user/zhangsan"},
+                           {"index":1, "key":"sex", "label":"性别", "value":"先生"},
+                           {"index":5, "key":"reg_date", "label":"注册日期", "value":"2015-11-16"},
+                           {"index":6, "key":"last_login", "label":"上次登录时间", "value":"2015-12-22 15:38:54"}
+                       ])
+                   });
+                }
+            })
+        </script>
+    </body>
+</html>
